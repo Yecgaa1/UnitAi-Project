@@ -25,5 +25,11 @@ x1.sheet_by_name("test")  # 通过sheet名查找
 ```python
 sheet1=x1.sheet_by_name("test")
 ```
-
-## 3.
+读取工作表中有关的数据
+```python
+sheet1.name   # 获取sheet的名字
+sheet1.nrows  # 获取总行数
+sheet1.ncols  # 获取总列数
+```
+## 3.读取单元格内容
+```python
