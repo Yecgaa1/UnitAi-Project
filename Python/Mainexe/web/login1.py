@@ -7,23 +7,28 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5 import*
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMenu,QLineEdit
+from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal
+import sys
+#基本四大包导入
 # PyQt5.QtWidgets import*
 #from PyQt5.QtCore import *
 #from PyQt5.QtGui import *
 #from PyQt5.QtWidgets import *
-import sys
-from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal
-import sys
+#以下为导入功能包
+import socket
+#以下为导入自定义函数
+import proxy
+
+
 
 class Ui(QWidget):
     def __init__(self):
         super().__init__()
         self.test=123
         self.setupUi(self)
-    def proxy(self):
-
+    def proxyon(self):
+        proxy.proxy()
     def login(self):
         self.loginButton.setEnabled(False)
         acc = self.textaccount.text()
@@ -31,7 +36,7 @@ class Ui(QWidget):
 
         #获取密码和账号
         #以下为建立tcp连接
-
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -83,7 +88,7 @@ class Ui(QWidget):
         #按钮事件绑定
 
         self.loginButton.clicked.connect(self.login)
-        self.proxyButton.clicked.connect(self,proxy)
+        self.proxyButton.clicked.connect(self.proxyon)
         # 结束第二初始化
         self.show()
 
@@ -104,6 +109,6 @@ class Ui(QWidget):
 
 #以下为启动器
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    loginapp = QApplication(sys.argv)
     ex = Ui()
-    sys.exit(app.exec_())
+    sys.exit(loginapp.exec_())
