@@ -7,17 +7,17 @@ s.bind((host, port))        # 绑定端口
 
 s.listen(5)                 # 等待客户端连接
 i=0
-SQL={0:{"number":"0","car":"AAAAA"}}
+#SQL={0:{"number":"0","car":"AAAAA"}}
 while True:
     c, addr = s.accept()     # 建立客户端连接。
-    i+=1
+    #i+=1
     #print('连接地址：', addr)
-    c.send('go'.encode(encoding="utf-8"))
+    #c.send('go'.encode(encoding="utf-8"))
     msg1 = c.recv(1024)
     msg=msg1.decode('utf-8')
-    if '#' in msg:
+    #if '#' in msg:
   
-    if "*" in msg:
-      SQL[i]={"number":i,"car":msg}
-
+    #if "*" in msg:
+    #  SQL[i]={"number":i,"car":msg}
+    print(msg)
 

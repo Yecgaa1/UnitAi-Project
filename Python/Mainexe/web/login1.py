@@ -28,6 +28,7 @@ import proxy
 
 
 
+
 class Ui(QWidget):
     def __init__(self):
         super().__init__()
@@ -43,8 +44,17 @@ class Ui(QWidget):
         #获取密码和账号
         #以下为建立tcp连接
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        host = socket.gethostname()
+        port = 20500
+        s.connect((host, port))#ip和端口
+        s.send("acc-".encode(encoding="utf-8"))
+        s.send(acc.encode(encoding="utf-8"))
+        s.send("-pd-".encode(encoding="utf-8"))
+        s.send(pd.encode(encoding="utf-8"))
+        s.close()
 
     def setupUi(self, Dialog):
+
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 280)
         self.textaccount = QtWidgets.QLineEdit(Dialog)
@@ -115,6 +125,8 @@ class Ui(QWidget):
 
 #以下为启动器
 if __name__ == '__main__':
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     loginapp = QApplication(sys.argv)
     ex = Ui()
+
     sys.exit(loginapp.exec_())
