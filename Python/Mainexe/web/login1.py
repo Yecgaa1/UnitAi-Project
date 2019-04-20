@@ -10,13 +10,19 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMenu,QLineEdit
 from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal
 import sys
+
 #基本四大包导入
+
+#基本四大类导入
+
 # PyQt5.QtWidgets import*
 #from PyQt5.QtCore import *
 #from PyQt5.QtGui import *
 #from PyQt5.QtWidgets import *
+
 #以下为导入功能包
 import socket
+
 #以下为导入自定义函数
 import proxy
 
