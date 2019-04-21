@@ -23,6 +23,7 @@ import sys
 #以下为导入功能包
 import socket
 import os
+import json
 #以下为导入自定义函数
 import proxy
 
