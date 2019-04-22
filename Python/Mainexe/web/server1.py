@@ -17,11 +17,12 @@ s.bind((host, port))        # 绑定端口
 
 s.listen(5)                 # 等待客户端连接
 def login():
-    msg1 = c.recv(64)
+    msg1 = c.recv(16)
     ac = msg1.decode('utf-8')
+    print(ac)
     msg1 = c.recv(64)
     pd = msg1.decode('utf-8')
-
+    print(pd)
     #json 校验
 
 while True:

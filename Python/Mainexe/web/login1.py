@@ -52,9 +52,8 @@ class Ui(QWidget):
         s.connect((host, port))#ip和端口
         s.send("lo".encode('utf-8'))
         sha256 = hashlib.sha256()
-        sha256.update(acc.encode('utf-8'))
-        res = sha256.hexdigest()
-        s.send(res.encode('utf-8'))
+        s.send(acc.encode('utf-8'))
+        time.sleep(1)
         sha256.update(pd.encode('utf-8'))
         res = sha256.hexdigest()
         s.send(res.encode('utf-8'))

@@ -1,11 +1,14 @@
+import hashlib
 import json
-f=open("./config/user.json", "r+")
 acc=input()
 pd=input()
-dit=json.loads(f.read())
-f.close()
-f=open("./config/user.json", "wb")
-dit.update({acc:{"acc":acc}})
-dit.update({acc:{"pd":pd}})
-f.write(json.dumps(dit))
-f.close()
+sha256 = hashlib.sha256()
+sha256.update(pd.encode('utf-8'))
+res = sha256.hexdigest()
+with open("./config/user.json",'r') as load_f:
+  load_dict = json.load(load_f)
+  #print(load_dict)
+load_dict.update({acc:res})
+#print(load_dict)
+with open("./config/user.json","w") as f:
+   json.dump(load_dict,f)
