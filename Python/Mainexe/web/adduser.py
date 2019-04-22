@@ -1,0 +1,11 @@
+import json
+f=open("./config/user.json", "r+")
+acc=input()
+pd=input()
+dit=json.loads(f.read())
+f.close()
+f=open("./config/user.json", "wb")
+dit.update({acc:{"acc":acc}})
+dit.update({acc:{"pd":pd}})
+f.write(json.dumps(dit))
+f.close()

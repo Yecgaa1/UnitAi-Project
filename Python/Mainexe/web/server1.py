@@ -16,5 +16,18 @@ port = 20500                # 设置端口
 s.bind((host, port))        # 绑定端口
 
 s.listen(5)                 # 等待客户端连接
+def login():
+    msg1 = c.recv(64)
+    ac = msg1.decode('utf-8')
+    msg1 = c.recv(64)
+    pd = msg1.decode('utf-8')
+
+    #json 校验
+
 while True:
     c, addr = s.accept()     # 建立客户端连接。
+    msg1 = c.recv(2)
+    msg = msg1.decode('utf-8')
+    if(msg=="lo"):
+        login()
+
