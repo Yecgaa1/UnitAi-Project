@@ -1,4 +1,5 @@
 #导入必要包
+import json
 import socket
 #导入自定义函数
 
@@ -24,6 +25,16 @@ def login():
     pd = msg1.decode('utf-8')
     print(pd)
     #json 校验
+    with open("./config/user.json", 'r') as load_f:
+        load_dict = json.load(load_f)
+    if ac in load_dict:
+        if(pd==load_dict[ac]):
+            c.send("S".encode('utf-8'))
+        else:
+            c.send("S".encode('utf-8'))
+    else:
+        c.send("N".encode('utf-8'))
+
 
 while True:
     c, addr = s.accept()     # 建立客户端连接。

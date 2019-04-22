@@ -57,6 +57,11 @@ class Ui(QWidget):
         sha256.update(pd.encode('utf-8'))
         res = sha256.hexdigest()
         s.send(res.encode('utf-8'))
+        time.sleep(1)
+
+        msg1 = s.recv(1)
+        so = msg1.decode('utf-8')
+        print(so)
         s.close()
 
     def setupUi(self, Dialog):
