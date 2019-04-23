@@ -6,10 +6,10 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QMenu,QLineEdit
-from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal
-from PyQt5.QtGui import QIcon, QPainter, QPixmap, QPalette, QBrush
+from PyQt5 import QtCore, QtGui, QtWidgets,Qt
+from PyQt5.QtWidgets import  QApplication, QPushButton, QMenu,QLineEdit,QMainWindow,QLabel
+from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal,Qt
+from PyQt5.QtGui import QIcon, QPainter, QPixmap,QPalette,QBrush
 import sys
 
 #基本五大包导入
@@ -35,7 +35,7 @@ import proxy
 
 
 
-class Ui(QWidget):
+class Ui(QMainWindow):
     def __init__(self):
         super().__init__()
         self.test=123
@@ -76,7 +76,9 @@ class Ui(QWidget):
     def root(self):
         if(self.textaccount.text()=="root"):
             print("a")
-            self.setStyleSheet("#MainWindow{border-image:url(./images/rootlogin.jpg);}")
+            palette = QPalette()
+            palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/login.jpg")))
+            self.setPalette(palette)
 
     def setupUi(self, Dialog):
 
@@ -84,8 +86,6 @@ class Ui(QWidget):
         self.setWindowTitle('登录')
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")#系统图标
         self.setWindowIcon(QIcon('.\images\Iron.png'))
-
-        #self.setStyleSheet("#MainWindow{border-image:url(./images/rootlogin.jpg);}")
         Dialog.resize(400, 280)
         self.textaccount = QtWidgets.QLineEdit(Dialog)
         self.textaccount.setGeometry(QtCore.QRect(100, 60, 256, 31))
@@ -107,6 +107,9 @@ class Ui(QWidget):
         self.loginButton = QtWidgets.QPushButton(Dialog)
         self.loginButton.setGeometry(QtCore.QRect(280, 200, 75, 23))
         self.loginButton.setObjectName("loginButton")
+        self.visitButton = QtWidgets.QPushButton(Dialog)
+        self.visitButton.setGeometry(QtCore.QRect(280, 220, 75, 23))
+        self.visitButton.setObjectName("visitButton")
         self.proxyButton = QtWidgets.QPushButton(Dialog)
         self.proxyButton.setGeometry(QtCore.QRect(10, 250, 75, 23))
         self.proxyButton.setObjectName("proxyButton")
@@ -131,8 +134,11 @@ class Ui(QWidget):
         # QLineEdit.NoEcho：不显示任何输入的字符，常用于密码类型的输入，且长度保密
         self.textpassword.setEchoMode(QLineEdit.Password)
         #设置背景
-        palette1 = QPalette()
-        palette1.setBrush(self.backgroundRole(), QBrush(QPixmap(".\images\rootlogin.jpg")))
+
+
+
+        #无边框
+        #self.setWindowFlags(Qt.Qt.FramelessWindowHint | Qt.Qt.WindowStaysOnTopHint)
 
         #按钮事件绑定
         self.textaccount.editingFinished.connect(self.root)
@@ -153,6 +159,7 @@ class Ui(QWidget):
         self.comboBox.setItemText(0, _translate("Dialog", "Language:中文"))
         self.comboBox.setItemText(1, _translate("Dialog", "Language:English"))
         self.comboBox.setItemText(2, _translate("Dialog", "Language:"))
+        self.visitButton.setText(_translate("Dialog", "普通使用"))
         #本地化
 
 

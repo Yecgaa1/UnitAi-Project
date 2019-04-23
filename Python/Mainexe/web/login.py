@@ -44,6 +44,9 @@ class Ui_Dialog(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        self.pushButton_3 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_3.setGeometry(QtCore.QRect(280, 220, 75, 23))
+        self.pushButton_3.setObjectName("pushButton_3")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -60,4 +63,5 @@ class Ui_Dialog(object):
         self.comboBox.setItemText(0, _translate("Dialog", "Language:中文"))
         self.comboBox.setItemText(1, _translate("Dialog", "Language:English"))
         self.comboBox.setItemText(2, _translate("Dialog", "Language:"))
+        self.pushButton_3.setText(_translate("Dialog", "普通使用"))
 
