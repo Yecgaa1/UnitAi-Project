@@ -31,7 +31,7 @@ def login():
         if(pd==load_dict[ac]):
             c.send("S".encode('utf-8'))
         else:
-            c.send("S".encode('utf-8'))
+            c.send("N".encode('utf-8'))
     else:
         c.send("N".encode('utf-8'))
 
