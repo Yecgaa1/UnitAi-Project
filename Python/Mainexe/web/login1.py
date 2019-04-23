@@ -32,7 +32,8 @@ import ctypes
 
 import proxy
 
-
+with open("./config/config.json", 'r') as load_f:
+    load_dict = json.load(load_f)
 
 
 class Ui(QMainWindow):
@@ -43,12 +44,25 @@ class Ui(QMainWindow):
     def proxyon(self):
         proxy.proxy()
     def login(self):
-        self.loginButton.setText("登陆中")
+
+
+
         self.loginButton.setEnabled(False)
         acc = self.textaccount.text()
         pd = self.textpassword.text()
+        # 获取密码和账号
+        load={}
 
-        #获取密码和账号
+        if self.remember.isChecked() and load_dict["loginmode"]==0:
+            load_dict.update({"acc":acc})
+            load_dict.update({"pd":pd})
+            load_dict["loginmode"]=1
+            with open("./config/config.json", "w") as f:
+                json.dump(load_dict, f)
+        if self.remember.isChecked() and load_dict["loginmode"] != 2:
+            load_dict["loginmode"] = 2
+            with open("./config/config.json", "w") as f:
+                json.dump(load_dict, f)
         #以下为建立tcp连接
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         host = socket.gethostname()
@@ -74,54 +88,70 @@ class Ui(QMainWindow):
         s.close()
 
     def root(self):
-        if(self.textaccount.text()=="root"):
+        if(self.textaccount.text()=="xutongxin"):
             print("a")
             palette = QPalette()
-            palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/login.jpg")))
+            palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/xlogin.jpg")))
             self.setPalette(palette)
+    def auto(self):
+        if self.Auto.isChecked():
+            self.remember.setChecked(True)
+
 
     def setupUi(self, Dialog):
+        #json加载
+        with open("./config/config.json", 'r') as load_f:
+            load_dict = json.load(load_f)
+
 
         Dialog.setObjectName("Dialog")
         self.setWindowTitle('登录')
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")#系统图标
         self.setWindowIcon(QIcon('.\images\Iron.png'))
-        Dialog.resize(400, 280)
-        self.textaccount = QtWidgets.QLineEdit(Dialog)
-        self.textaccount.setGeometry(QtCore.QRect(100, 60, 256, 31))
-        self.textaccount.setObjectName("account")
+        Dialog.resize(512, 292)
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(40, 70, 54, 20))
+        self.label.setGeometry(QtCore.QRect(33, 70, 61, 31))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label.setFont(font)
         self.label.setAutoFillBackground(False)
         self.label.setObjectName("label")
-        self.textpassword = QtWidgets.QLineEdit(Dialog)
-        self.textpassword.setGeometry(QtCore.QRect(100, 140, 256, 31))
-        self.textpassword.setObjectName("password")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(40, 140, 54, 20))
+        self.label_2.setGeometry(QtCore.QRect(33, 150, 54, 20))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.label_2.setFont(font)
         self.label_2.setAutoFillBackground(False)
         self.label_2.setObjectName("label_2")
-        self.checkBox = QtWidgets.QCheckBox(Dialog)
-        self.checkBox.setGeometry(QtCore.QRect(90, 200, 71, 16))
-        self.checkBox.setObjectName("checkBox")
+        self.remember = QtWidgets.QCheckBox(Dialog)
+        self.remember.setGeometry(QtCore.QRect(110, 200, 71, 16))
+        self.remember.setObjectName("remember")
         self.loginButton = QtWidgets.QPushButton(Dialog)
-        self.loginButton.setGeometry(QtCore.QRect(280, 200, 75, 23))
+        self.loginButton.setGeometry(QtCore.QRect(410, 210, 91, 41))
         self.loginButton.setObjectName("loginButton")
-        self.visitButton = QtWidgets.QPushButton(Dialog)
-        self.visitButton.setGeometry(QtCore.QRect(280, 220, 75, 23))
-        self.visitButton.setObjectName("visitButton")
         self.proxyButton = QtWidgets.QPushButton(Dialog)
-        self.proxyButton.setGeometry(QtCore.QRect(10, 250, 75, 23))
+        self.proxyButton.setGeometry(QtCore.QRect(10, 250, 111, 31))
         self.proxyButton.setObjectName("proxyButton")
-        self.checkBox_2 = QtWidgets.QCheckBox(Dialog)
-        self.checkBox_2.setGeometry(QtCore.QRect(180, 200, 71, 16))
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.comboBox = QtWidgets.QComboBox(Dialog)
-        self.comboBox.setGeometry(QtCore.QRect(90, 250, 110, 23))
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
+        self.Auto = QtWidgets.QCheckBox(Dialog)
+        self.Auto.setGeometry(QtCore.QRect(270, 200, 71, 16))
+        self.Auto.setObjectName("Auto")
+        self.language = QtWidgets.QComboBox(Dialog)
+        self.language.setGeometry(QtCore.QRect(130, 250, 121, 31))
+        self.language.setObjectName("language")
+        self.language.addItem("")
+        self.language.addItem("")
+        self.language.addItem("")
+        self.visitButton = QtWidgets.QPushButton(Dialog)
+        self.visitButton.setGeometry(QtCore.QRect(410, 250, 91, 41))
+        self.visitButton.setObjectName("visitButton")
+        self.textaccount = QtWidgets.QLineEdit(Dialog)
+        self.textaccount.setGeometry(QtCore.QRect(100, 60, 351, 31))
+        self.textaccount.setObjectName("textaccount")
+        self.textpassword = QtWidgets.QLineEdit(Dialog)
+        self.textpassword.setGeometry(QtCore.QRect(100, 140, 351, 31))
+        self.textpassword.setObjectName("textpassword")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -134,7 +164,9 @@ class Ui(QMainWindow):
         # QLineEdit.NoEcho：不显示任何输入的字符，常用于密码类型的输入，且长度保密
         self.textpassword.setEchoMode(QLineEdit.Password)
         #设置背景
-
+        palette = QPalette()
+        palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/normal.jpg")))
+        self.setPalette(palette)
 
 
         #无边框
@@ -144,21 +176,32 @@ class Ui(QMainWindow):
         self.textaccount.editingFinished.connect(self.root)
         self.loginButton.clicked.connect(self.login)
         self.proxyButton.clicked.connect(self.proxyon)
+        self.Auto.clicked.connect(self.auto)
+
+        if load_dict["loginmode"] == 2:
+            self.textaccount.setText(load_dict["acc"])
+            self.textpassword.setText(load_dict["pd"])
+            self.login()
+            return 0
+        if load_dict["loginmode"]==1:
+            self.textaccount.setText(load_dict["acc"])
+            self.textpassword.setText(load_dict["pd"])
+            self.remember.setChecked(True)
         # 结束第二初始化
         self.show()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "登录"))
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "  账号 "))
         self.label_2.setText(_translate("Dialog", "  密码"))
-        self.checkBox.setText(_translate("Dialog", "保存密码"))
+        self.remember.setText(_translate("Dialog", "保存密码"))
         self.loginButton.setText(_translate("Dialog", "登录"))
         self.proxyButton.setText(_translate("Dialog", "代理设置"))
-        self.checkBox_2.setText(_translate("Dialog", "自动登录"))
-        self.comboBox.setItemText(0, _translate("Dialog", "Language:中文"))
-        self.comboBox.setItemText(1, _translate("Dialog", "Language:English"))
-        self.comboBox.setItemText(2, _translate("Dialog", "Language:"))
+        self.Auto.setText(_translate("Dialog", "自动登录"))
+        self.language.setItemText(0, _translate("Dialog", "Language:中文"))
+        self.language.setItemText(1, _translate("Dialog", "Language:English"))
+        self.language.setItemText(2, _translate("Dialog", "Language:"))
         self.visitButton.setText(_translate("Dialog", "普通使用"))
         #本地化
 
