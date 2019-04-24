@@ -78,5 +78,3 @@ class Ui_Dialog(object):
         self.function3.setText(_translate("Dialog", "PushButton"))
         self.function4.setText(_translate("Dialog", "PushButton"))
         self.more.setText(_translate("Dialog", "PushButton"))
-
-import 123_rc
