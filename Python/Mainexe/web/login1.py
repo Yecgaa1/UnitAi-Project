@@ -8,13 +8,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets,Qt
 from PyQt5.QtWidgets import  QApplication, QPushButton, QMenu,QLineEdit,QMainWindow,QLabel
-from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal,Qt
+from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal
 from PyQt5.QtGui import QIcon, QPainter, QPixmap,QPalette,QBrush
 import sys
 
 #基本五大包导入
 
-#基本四大类导入
+
 
 # PyQt5.QtWidgets import*
 #from PyQt5.QtCore import *
@@ -53,16 +53,23 @@ class Ui(QMainWindow):
         # 获取密码和账号
         load={}
 
-        if self.remember.isChecked() and load_dict["loginmode"]==0:
-            load_dict.update({"acc":acc})
-            load_dict.update({"pd":pd})
-            load_dict["loginmode"]=1
+        if self.remember.isChecked():
+            if "acc" in load_dict:
+                load_dict["acc"]=acc
+                load_dict["pd"]=pd
+            else:
+                load_dict.update({"acc":acc})
+                load_dict.update({"pd":pd})
+            if load_dict["loginmode"] == 0:
+                load_dict["loginmode"]=1
+            #print(load_dict)
             with open("./config/config.json", "w") as f:
                 json.dump(load_dict, f)
-        if self.remember.isChecked() and load_dict["loginmode"] != 2:
+        if self.Auto.isChecked() and load_dict["loginmode"] != 2:
             load_dict["loginmode"] = 2
             with open("./config/config.json", "w") as f:
                 json.dump(load_dict, f)
+
         #以下为建立tcp连接
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         host = socket.gethostname()
@@ -170,7 +177,7 @@ class Ui(QMainWindow):
 
 
         #无边框
-        #self.setWindowFlags(Qt.Qt.FramelessWindowHint | Qt.Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(Qt.Qt.FramelessWindowHint | Qt.Qt.WindowStaysOnTopHint)
 
         #按钮事件绑定
         self.textaccount.editingFinished.connect(self.root)
