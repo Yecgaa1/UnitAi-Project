@@ -177,7 +177,11 @@ class Ui(QMainWindow):
 
 
         #无边框
-        self.setWindowFlags(Qt.Qt.FramelessWindowHint | Qt.Qt.WindowStaysOnTopHint)
+        #self.setWindowFlags(Qt.Qt.FramelessWindowHint | Qt.Qt.WindowStaysOnTopHint)
+
+        #screen = QtGui.QDesktopWidget().screenGeometry()
+        #setGeometry(0, 0, screen.width(), screen.height())
+
 
         #按钮事件绑定
         self.textaccount.editingFinished.connect(self.root)
@@ -195,6 +199,8 @@ class Ui(QMainWindow):
             self.textpassword.setText(load_dict["pd"])
             self.remember.setChecked(True)
         # 结束第二初始化
+
+        #self.showMaximized()
         self.show()
 
     def retranslateUi(self, Dialog):
