@@ -31,6 +31,7 @@ import ctypes
 #以下为导入自定义函数
 
 import proxy
+import Im
 
 with open("./config/config.json", 'r') as load_f:
     load_dict = json.load(load_f)
@@ -39,13 +40,10 @@ with open("./config/config.json", 'r') as load_f:
 class Ui(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.test=123
         self.setupUi(self)
     def proxyon(self):
         proxy.proxy()
     def login(self):
-
-
 
         self.loginButton.setEnabled(False)
         acc = self.textaccount.text()
@@ -89,6 +87,7 @@ class Ui(QMainWindow):
         print(so)
         if(so=="S"):
             self.loginButton.setText("登录成功")
+
         else:
             self.loginButton.setEnabled(True)
             self.loginButton.setText("密码错误")
@@ -224,5 +223,4 @@ if __name__ == '__main__':
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     loginapp = QApplication(sys.argv)
     ex = Ui()
-
     sys.exit(loginapp.exec_())

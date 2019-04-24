@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(1024, 768)
+        Dialog.resize(1024, 657)
         Dialog.setStyleSheet("")
         self.head = QtWidgets.QLabel(Dialog)
         self.head.setGeometry(QtCore.QRect(0, 0, 111, 61))
@@ -24,18 +24,18 @@ class Ui_Dialog(object):
         self.account.setText("")
         self.account.setObjectName("account")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(130, 60, 891, 660))
+        self.label_2.setGeometry(QtCore.QRect(130, 60, 891, 551))
         self.label_2.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
-        self.lineEdit.setGeometry(QtCore.QRect(212, 720, 731, 48))
+        self.lineEdit.setGeometry(QtCore.QRect(212, 610, 731, 48))
         self.lineEdit.setObjectName("lineEdit")
         self.send = QtWidgets.QPushButton(Dialog)
-        self.send.setGeometry(QtCore.QRect(943, 720, 82, 51))
+        self.send.setGeometry(QtCore.QRect(943, 610, 82, 51))
         self.send.setObjectName("send")
         self.voice = QtWidgets.QPushButton(Dialog)
-        self.voice.setGeometry(QtCore.QRect(130, 720, 82, 51))
+        self.voice.setGeometry(QtCore.QRect(130, 610, 82, 51))
         self.voice.setText("")
         self.voice.setObjectName("voice")
         self.workmode = QtWidgets.QPushButton(Dialog)
@@ -78,3 +78,5 @@ class Ui_Dialog(object):
         self.function3.setText(_translate("Dialog", "PushButton"))
         self.function4.setText(_translate("Dialog", "PushButton"))
         self.more.setText(_translate("Dialog", "PushButton"))
+
+import 123_rc
