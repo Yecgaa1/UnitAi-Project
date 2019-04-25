@@ -87,6 +87,9 @@ class Ui(QMainWindow):
         print(so)
         if(so=="S"):
             self.loginButton.setText("登录成功")
+            self.close()
+            Im.main(acc)
+            sys.exit()
 
         else:
             self.loginButton.setEnabled(True)

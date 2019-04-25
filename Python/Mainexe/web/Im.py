@@ -18,7 +18,6 @@ class Ui(QMainWindow):
         super().__init__()
         self.setupUi(self)
 
-    def getimform(self):
 
     def setupUi(self, Dialog):
                 Dialog.setObjectName("Dialog")
@@ -101,7 +100,7 @@ class Ui(QMainWindow):
 
 if __name__ == '__main__':
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
-    loginapp = QApplication(sys.argv)
+    Imapp = QApplication(sys.argv)
     ex = Ui()
 
-    sys.exit(loginapp.exec_())
+    sys.exit(Imapp.exec_())
