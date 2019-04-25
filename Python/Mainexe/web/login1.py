@@ -6,10 +6,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets,Qt
-from PyQt5.QtWidgets import  QApplication, QPushButton, QMenu,QLineEdit,QMainWindow,QLabel
-from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal
-from PyQt5.QtGui import QIcon, QPainter, QPixmap,QPalette,QBrush
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import  QApplication, QLineEdit,QMainWindow
+from PyQt5.QtGui import QIcon, QPixmap,QPalette,QBrush
 import sys
 
 #基本五大包导入
@@ -23,85 +22,27 @@ import sys
 
 #以下为导入功能包
 import socket
-import os
 import json
 import hashlib
 import time
 import ctypes
 #以下为导入自定义函数
 
-import proxy
-import Im
+#import Im
+#from Main import loginsuccess
 
 with open("./config/config.json", 'r') as load_f:
     load_dict = json.load(load_f)
 
 
-class Ui(QMainWindow):
+class Ui_login(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-    def proxyon(self):
-        proxy.proxy()
-    def login(self):
 
-        self.loginButton.setEnabled(False)
-        acc = self.textaccount.text()
-        pd = self.textpassword.text()
-        # 获取密码和账号
-        load={}
 
-        if self.remember.isChecked():
-            if "acc" in load_dict:
-                load_dict["acc"]=acc
-                load_dict["pd"]=pd
-            else:
-                load_dict.update({"acc":acc})
-                load_dict.update({"pd":pd})
-            if load_dict["loginmode"] == 0:
-                load_dict["loginmode"]=1
-            #print(load_dict)
-            with open("./config/config.json", "w") as f:
-                json.dump(load_dict, f)
-        if self.Auto.isChecked() and load_dict["loginmode"] != 2:
-            load_dict["loginmode"] = 2
-            with open("./config/config.json", "w") as f:
-                json.dump(load_dict, f)
 
-        #以下为建立tcp连接
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        host = socket.gethostname()
-        port = 20500
-        s.connect((host, port))#ip和端口
-        s.send("lo".encode('utf-8'))
-        sha256 = hashlib.sha256()
-        s.send(acc.encode('utf-8'))
-        time.sleep(1)
-        sha256.update(pd.encode('utf-8'))
-        res = sha256.hexdigest()
-        s.send(res.encode('utf-8'))
-        #time.sleep(1)
 
-        msg1 = s.recv(1)
-        so = msg1.decode('utf-8')
-        print(so)
-        if(so=="S"):
-            self.loginButton.setText("登录成功")
-            self.close()
-            Im.main(acc)
-            sys.exit()
-
-        else:
-            self.loginButton.setEnabled(True)
-            self.loginButton.setText("密码错误")
-        s.close()
-
-    def root(self):
-        if(self.textaccount.text()=="xutongxin"):
-            print("a")
-            palette = QPalette()
-            palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/xlogin.jpg")))
-            self.setPalette(palette)
     def auto(self):
         if self.Auto.isChecked():
             self.remember.setChecked(True)
@@ -172,10 +113,6 @@ class Ui(QMainWindow):
         self.textpassword.setPlaceholderText("密码")
         # QLineEdit.NoEcho：不显示任何输入的字符，常用于密码类型的输入，且长度保密
         self.textpassword.setEchoMode(QLineEdit.Password)
-        #设置背景
-        palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/normal.jpg")))
-        self.setPalette(palette)
 
 
         #无边框
@@ -186,9 +123,9 @@ class Ui(QMainWindow):
 
 
         #按钮事件绑定
-        self.textaccount.editingFinished.connect(self.root)
-        self.loginButton.clicked.connect(self.login)
-        self.proxyButton.clicked.connect(self.proxyon)
+        #self.textaccount.editingFinished.connect(self.root)
+        #self.loginButton.clicked.connect(self.login)
+        #self.proxyButton.clicked.connect(self.proxyon)
         self.Auto.clicked.connect(self.auto)
 
         if load_dict["loginmode"] == 2:
@@ -203,7 +140,7 @@ class Ui(QMainWindow):
         # 结束第二初始化
 
         #self.showMaximized()
-        self.show()
+
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -221,9 +158,9 @@ class Ui(QMainWindow):
         #本地化
 
 
-#以下为启动器
-if __name__ == '__main__':
+
+if __name__ == '__main__':#调试用启动器
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     loginapp = QApplication(sys.argv)
-    ex = Ui()
+    ex = Ui_login()
     sys.exit(loginapp.exec_())

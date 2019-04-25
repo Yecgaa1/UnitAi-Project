@@ -12,7 +12,7 @@ import sys
 #以下为导入自定义函数
 #工具箱
 
-class Ui(QMainWindow):
+class Ui_IM(QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -76,13 +76,13 @@ class Ui(QMainWindow):
                 self.retranslateUi(Dialog)
                 QtCore.QMetaObject.connectSlotsByName(Dialog)
                 #完成第一阶段初始化
-                self.getimform()
+                #self.getimform()
 
 
 
 
                  #完成第二阶段初始化
-                self.show()
+                #self.show()
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -95,12 +95,12 @@ class Ui(QMainWindow):
         self.function2.setText(_translate("Dialog", "PushButton"))
         self.function3.setText(_translate("Dialog", "PushButton"))
         self.function4.setText(_translate("Dialog", "PushButton"))
-        self.more.setText(_translate("Dialog", "PushButton"))
+        self.more.setText(_translate("Dialog", "更多工具"))
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':#调试用启动器
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     Imapp = QApplication(sys.argv)
-    ex = Ui()
-
+    ex = Ui_IM()
+    ex.show()
     sys.exit(Imapp.exec_())
