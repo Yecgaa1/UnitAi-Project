@@ -48,6 +48,9 @@ def login_action():
 #login事件总线
 def Im_reload(sacc):
     Im_account.setText(sacc)
+    if sacc=="xutongxin":
+        Im_account.setStyleSheet("font: 12pt \"萝莉体 第二版\";\n"
+                              "color: rgb(102, 204, 255);")
 def root():
     if(lo_textaccount.text()=="xutongxin"):
         print("a")

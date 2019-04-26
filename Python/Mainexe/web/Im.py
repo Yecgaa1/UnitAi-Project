@@ -29,7 +29,7 @@ class Ui_IM(QMainWindow):
                 self.head.setObjectName("head")
                 self.account = QtWidgets.QLabel(Dialog)
                 self.account.setGeometry(QtCore.QRect(123, 21, 101, 41))
-                self.account.setStyleSheet("font: 12pt \"萝莉体 第二版\";\n"
+                self.account.setStyleSheet("font: 12pt ;\n"
                                            "color: rgb(102, 204, 255);")
                 self.account.setText("")
                 self.account.setObjectName("account")
