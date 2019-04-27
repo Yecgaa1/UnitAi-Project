@@ -25,7 +25,7 @@ def login():
     pd = msg1.decode('utf-8')
     print(pd)
     #json 校验
-    with open("./config/user.json", 'r') as load_f:
+    with open("./SQL/user.json", 'r') as load_f:
         load_dict = json.load(load_f)
     if ac in load_dict:
         if(pd==load_dict[ac]):

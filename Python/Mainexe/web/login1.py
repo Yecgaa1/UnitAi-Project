@@ -123,9 +123,6 @@ class Ui_login(QMainWindow):
 
 
         #按钮事件绑定
-        #self.textaccount.editingFinished.connect(self.root)
-        #self.loginButton.clicked.connect(self.login)
-        #self.proxyButton.clicked.connect(self.proxyon)
         self.Auto.clicked.connect(self.auto)
 
         if load_dict["loginmode"] == 2:
