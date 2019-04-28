@@ -85,7 +85,7 @@ def login():
     # 以下为建立tcp连接
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host = socket.gethostname()
-    port = 20500
+    port = 19150
     s.connect((host, port))  # ip和端口
     s.send("lo".encode('utf-8'))
     sha256 = hashlib.sha256()
