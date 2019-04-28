@@ -16,9 +16,14 @@ def file_deal(file_name):
 while True:
     c, addr = s.accept()     # 建立客户端连接。
     mes = file_deal("test.jpg")
+    size = os.path.getsize("test.jpg")
+    size1=str(size)#encoda只接受str类型
+    c.send(size1.encode())
+    time.sleep(0.5)
     if mes:
         # 如果文件不为空发送
-
-        s.send(mes)
+        print(mes)
+        c.send(mes)
+        print(1)
 
 
