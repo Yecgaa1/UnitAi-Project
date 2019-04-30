@@ -1,5 +1,5 @@
 import socket
-import os
+import os,time
 
 # 创建 socket 对象
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,19 +15,4 @@ s.connect((host, port))
 file_name="123.jpg"
 # 接收小于 1024 字节的数据
 new_file = open(file_name, "wb")
-
-while True:
-        size = s.recv(20)
-        print(size)
-        # 接收服务器端返回的内容
-        mes = s.recv(int(size))
-        # 如果内容不为空执行
-        if mes:
-            # 解码并向文件内写入
-            print(1)
-            new_file.write(mes)
-
-            # 计算字节
-            print(1)
-        new_file.close()
-        break
+s.send("S".encode('utf-8'))
