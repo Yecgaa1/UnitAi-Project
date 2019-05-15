@@ -15,4 +15,6 @@ s.connect((host, port))
 file_name="123.jpg"
 # 接收小于 1024 字节的数据
 new_file = open(file_name, "wb")
-s.send("S".encode('utf-8'))
+while 1:
+    time.sleep(5)
+    s.send("S".encode('utf-8'))

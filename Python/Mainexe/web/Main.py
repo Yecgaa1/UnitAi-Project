@@ -1,3 +1,4 @@
+import ctypes
 
 from PyQt5 import QtCore, QtGui, QtWidgets,Qt
 from PyQt5.QtWidgets import  QApplication, QPushButton, QMenu,QLineEdit,QMainWindow,QDialog
@@ -27,12 +28,17 @@ with open("./config/config.json", 'r') as load_f:
 class LoginWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+        self.setWindowTitle('登录')
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")  # 系统图标
+        self.setWindowIcon(QIcon('.\images\Iron.png'))
+
         self.main_ui = Ui_login()
         self.main_ui.setupUi(self)
 
 class ImWindow(QMainWindow):
     def __init__(self):
         QDialog.__init__(self)
+
         self.child=Ui_IM()
         self.child.setupUi(self)
 
@@ -51,6 +57,9 @@ def Im_reload(sacc):
     if sacc=="xutongxin":
         Im_account.setStyleSheet("font: 12pt \"萝莉体 第二版\";\n"
                               "color: rgb(102, 204, 255);")
+
+
+
 def root():
     if(lo_textaccount.text()=="xutongxin"):
         print("a")

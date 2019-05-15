@@ -55,9 +55,6 @@ class Ui_login(QMainWindow):
 
 
         Dialog.setObjectName("Dialog")
-        self.setWindowTitle('登录')
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")#系统图标
-        self.setWindowIcon(QIcon('.\images\Iron.png'))
         Dialog.resize(512, 292)
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(33, 70, 61, 31))

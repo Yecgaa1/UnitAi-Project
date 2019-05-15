@@ -81,6 +81,7 @@ class Ui_IM(QMainWindow):
 
 
 
+
                  #完成第二阶段初始化
                 #self.show()
 
@@ -91,7 +92,7 @@ class Ui_IM(QMainWindow):
         self.workmode.setText(_translate("Dialog", "工作模式"))
         self.livemode.setText(_translate("Dialog", "实例模式"))
         self.setting.setText(_translate("Dialog", "PushButton"))
-        self.function1.setText(_translate("Dialog", "PushButton"))
+        self.function1.setText(_translate("Dialog", "文档转换"))
         self.function2.setText(_translate("Dialog", "PushButton"))
         self.function3.setText(_translate("Dialog", "PushButton"))
         self.function4.setText(_translate("Dialog", "PushButton"))
