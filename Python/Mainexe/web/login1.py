@@ -102,6 +102,12 @@ class Ui_login(QMainWindow):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        op = QtWidgets.QGraphicsOpacityEffect()
+        op.setOpacity(0.5)
+        op1 = QtWidgets.QGraphicsOpacityEffect()
+        op1.setOpacity(0.5)
+        self.textaccount.setGraphicsEffect(op)
+        self.textpassword.setGraphicsEffect(op1)
         #完成界面第一初始化
         #以下为修改界面参数
 
