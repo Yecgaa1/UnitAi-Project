@@ -42,6 +42,7 @@ class Ui_file_exchange(QMainWindow):
             path = os.path.join(dir_choose, list[i])
             if os.path.isfile(path):
                 print(path)
+
                 self.tableWidget.setItem(num, 0, QTableWidgetItem(num))
                 self.tableWidget.setItem(num, 1, QTableWidgetItem(path))
 
@@ -121,7 +122,7 @@ class Ui_file_exchange(QMainWindow):
         self.tableWidget.setGeometry(QtCore.QRect(0, 50, 801, 431))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(4)
-        self.tableWidget.setRowCount(10)
+        self.tableWidget.setRowCount(1)
         titles=['编号','文件路径','目标格式','状态']
         self.tableWidget.setHorizontalHeaderLabels(titles)
         self.tableWidget.setColumnWidth(0, 50)
