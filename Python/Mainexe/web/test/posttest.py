@@ -5,51 +5,53 @@ import os
 apikey="4fc3a688d6aaf8c4368bad7acf78c9e7"
 if(True):
     input="upload"
-    file="http://google.com/"
-    outputformat="png"
+    outputformat="pdf"
     headers = {'Content-Type': 'application/json'}
     urlbegin = "https://api.convertio.co/convert"
-
-    urlfinish="https://api.convertio.co/convert/:id/dl/:type"
     data_begin = {
             "apikey": apikey,
-            "input":input,
-            #"file": file,
+            "input":"upload",
             "outputformat": outputformat,
-
+            "filename":"123.doc"
               }
 
     req = requests.post(urlbegin, json.dumps(data_begin), headers)
     result = json.loads(req.text)
     id=result['data']['id']
     print(id)
-    urlupload="https://api.convertio.co/convert/"+id+"/test.jpg"
-    files = {'file': open('test.jpg', 'rb')}
-    req = requests.put(urlupload,files=files)
+    urlupload="https://api.convertio.co/convert/"+id+"/123.doc"
+    file = {'file': open('123.doc', 'rb')}
+    req = requests.put(urlupload,files=file)
     result = json.loads(req.text)
     print(result)
     print("begin!")
     urlcheck="https://api.convertio.co/convert/"+id+"/status"
 
-    i=0
-    while i==0:
+    while 1:
         req = requests.get(urlcheck, headers)
         result1 = json.loads(req.text)
-        if(result1['data']['step']=="finish"):
-            i=1
-            print("end")
-        else:
-            print("Waiting")
-            print(result['data']['step_percent'])
+        try:
+            if(result1['data']['step']=="finish"):
+                break
+            else:
+                print("Waiting")
+                #print(result['data']['step_percent'])
+        except:
+            print(result1)
 
 
-    urlfinish="https://api.convertio.co/convert/"+id+"/dl/"
+    urlfinish="https://api.convertio.co/convert/"+id+"/dl/base64"
 
     req = requests.get(urlfinish, headers)
     result = json.loads(req.text)
-    base=result['data']['content']
+    try:
+        base=result['data']['content']
+        print(result)
+    except:
+        print(result)
 
+    #print(base)
     imgdata = base64.b64decode(base)
-    file = open('1.jpg','wb')
+    file = open('123.pdf','wb')
     file.write(imgdata)
     file.close()
