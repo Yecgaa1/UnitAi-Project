@@ -152,3 +152,4 @@ def sendfile2(int ip,int port,str head,str whfile)
     except:
         print("No server")
         return 0
+print("123")
