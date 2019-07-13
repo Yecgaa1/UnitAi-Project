@@ -8,4 +8,16 @@
 #### 管理者名单：
 创始人：许童心（lht)
 第二代负责人：（zqw)
-             （tjy)
+​             （tjy)
+
+### 项目文件架构
+
+server 服务端源程序
+
+client 客户端源程序
+
+install 项目安装脚本
+
+
+
+项目可以被PyCharm(.idea)与VSCode(.vs)打开

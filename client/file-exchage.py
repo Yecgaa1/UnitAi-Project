@@ -6,6 +6,7 @@ from PyQt5.QtGui import QIcon, QPainter, QPixmap,QPalette,QBrush
 import sys,os,socket,json,time,hashlib
 
 #基本五大包导入
+import send.py
 num = 0
 class Ui_file_exchange(QMainWindow):
     def __init__(self):
@@ -56,53 +57,41 @@ class Ui_file_exchange(QMainWindow):
                 num+=1
 
     def begin1(self):
-        try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            host = socket.gethostname()
-            port = 2020
-            s.connect((host, port))  # ip和端口
             num1=0
             while num1<=num:
                 path = self.tableWidget.item(num1, 1).text()
+                formatto = self.tableWidget.item(num1, 3).text()
                 q = path.find('.', -5, -1)
                 while path[q] != "/":
                     q -= 1
                 filename = path[q + 1:]
                 file = {'file': open(path, 'rb')}
-                size = len(file) + 10
+                size = len(file)
                 key = "123321"
                 fcont = file.r  # 该算法对内存有要求，不适用大文件，有待更新
                 md5 = hashlib.md5(fcont)
-                head1 = {
-                    "key": key,
+                head = {
+                    "apikey": key,
                     "size": size,
-                    "filename": filename
+                    "filename": filename,
+                    "md5":md5,
+                    "formatto":formatto
                 }
-                head2 = {
-                    "file": file,
-                    "md5": md5
-                }
-                s.send((json.dumps(head1)).encode('utf-8'))  # 握手
-                time.sleep(0.5)
-                msg = (s.recv(1)).decode('utf-8')
-                if (msg == "Y"):  # 开始上传
-                    s.send((json.dumps(head2)).encode('utf-8'))
-                    time.sleep(0.5)
-                    msg = (s.recv(1)).decode('utf-8')
-                    if (msg == 0):
-                        print("ok")
-                        self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传完成"))
-                    else:
-                        print("Error")
-                        self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传失败"))
-                    num1+=1
-                else:
-                    print("Head wrong")
-                    break
-
-
-        except:
-            print("No Server")
+                head=json.dumps(head)
+                back=sendfile1("127.0.0.1",11170,head,path)
+                if (back == 0):
+                    print("ok")
+                    self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传完成"))
+                elif(back == 1):
+                    self.tableWidget.setItem(num1, 3, QTableWidgetItem("未授权"))
+                    return
+                elif(back == 2):
+                    print("Error")
+                    self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传错误"))
+                elif(back == 3):
+                    self.tableWidget.setItem(num1, 3, QTableWidgetItem("无法连接到服务器"))
+                    return
+                num1+=1
 
 
 
