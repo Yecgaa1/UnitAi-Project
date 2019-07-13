@@ -8,7 +8,9 @@ host = socket.gethostname() # 获取本地主机名
 port = 11171            # 设置端口
 s.bind((host, port))        # 绑定端口
 s.listen(5)                 # 等待客户端连接
+def receive_service(connect_socket):
+    
 while True:
     connect_socket, client_addr = s.accept()
-    thread_do_service = Thread(target=do_service, args=(connect_socket,))
+    thread_do_service = Thread(target=receive_service, args=(connect_socket,))
     thread_do_service.start()
