@@ -1,14 +1,9 @@
 import socket
-<<<<<<< HEAD
 from threading import Thread
 #登录程序
 
 
 def login():
-=======
-#登录程序
-def login()
->>>>>>> f94ba7d153158776b97c34d107c0be0668178c91
 
 	#print(123)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -65,7 +60,6 @@ def login()
         # login触发事件
     except:
         print("No server")
-<<<<<<< HEAD
 
 #发送文件函数
 #标准文件发送函数(带检查，全加载式检查文件，不带进度，适用于10m以下）
@@ -158,9 +152,3 @@ def sendfile2(int ip,int port,str head,str whfile)
     except:
         print("No server")
         return 0
-=======
-		
-#发送文件函数
-#标准文件发送函数(带检查，全加载式检查文件，不带进度）
-def sendfile
->>>>>>> f94ba7d153158776b97c34d107c0be0668178c91
