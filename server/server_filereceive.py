@@ -1,6 +1,7 @@
 #导入必要包
 import json
 import socket
+import hashlib
 #导入自定义函数
 
 #内函数
@@ -18,7 +19,7 @@ while True:
         msg1 = c.recv(1024)
         msg = msg1.decode('utf-8')
         result=json.loads(msg.text)
-        if(result["apikey"]==0)
+        if(result["apikey"]==0):
             c.send("A".encode('utf-8'))
             print("Access denine")#数据库校验
             c.close()
@@ -27,9 +28,18 @@ while True:
         size=result["size"]
         msg1 = c.recv(size+10)
         msg = msg1.decode('utf-8')
-        fcont = msg.r  # 该算法对内存有要求，不适用大文件，有待更新
-        md5 = hashlib.md5(fcont)
-        if(result["md5"]==md5)
+
+        f = open(path, 'rb')  # 校验
+        md5_obj = hashlib.md5()
+        while True:
+            d = f.read(8096)
+            if not d:
+                break
+            md5_obj.update(d)
+        hash_code = md5_obj.hexdigest()
+        f.close()
+        md5 = str(hash_code).lower()
+        if(result["md5"]==md5):
             print("Success")
             c.send("C".encode('utf-8'))
             file = open(result["filename"],'wb')

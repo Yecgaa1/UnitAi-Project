@@ -46,7 +46,7 @@ class ImWindow(QMainWindow):
 
 def login_action():
     #loginButton = loginapp.main_ui.loginButton
-    loginButton.clicked.connect(login)
+    loginButton.clicked.connect(login1)
 
     palette = QPalette()
     palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/normal.jpg")))
@@ -68,8 +68,38 @@ def root():
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/xlogin.jpg")))
         loginapp.setPalette(palette)
-def login():
-    login()
+def login1():
+    loginButton.setEnabled(False)
+    acc = lo_textaccount.text()
+    pd = lo_textpassword.text()
+    # 获取密码和账号
+    load = {}
+
+    if lo_remember.isChecked():
+        if "acc" in load_dict:
+            load_dict["acc"] = acc
+            load_dict["pd"] = pd
+        else:
+            load_dict.update({"acc": acc})
+            load_dict.update({"pd": pd})
+        if load_dict["loginmode"] == 0:
+            load_dict["loginmode"] = 1
+        # print(load_dict)
+        with open("./config/config.json", "w") as f:
+            json.dump(load_dict, f)
+    if lo_Auto.isChecked() and load_dict["loginmode"] != 2:
+        load_dict["loginmode"] = 2
+        with open("./config/config.json", "w") as f:
+            json.dump(load_dict, f)
+    re=login(acc,pd)
+    if(re==0):
+        loginButton.setText("登录成功")
+        loginapp.close()
+        Imapp.show()
+        Im_reload(acc)
+    else:
+        loginButton.setEnabled(True)
+        loginButton.setText("密码错误")
 
 if __name__=='__main__':
 

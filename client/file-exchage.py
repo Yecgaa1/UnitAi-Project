@@ -6,7 +6,7 @@ from PyQt5.QtGui import QIcon, QPainter, QPixmap,QPalette,QBrush
 import sys,os,socket,json,time,hashlib
 
 #基本五大包导入
-import send.py
+from send import sendfile1
 num = 0
 class Ui_file_exchange(QMainWindow):
     def __init__(self):
@@ -60,16 +60,26 @@ class Ui_file_exchange(QMainWindow):
             num1=0
             while num1<=num:
                 path = self.tableWidget.item(num1, 1).text()
-                formatto = self.tableWidget.item(num1, 3).text()
+                formatto = self.tableWidget.item(num1, 2).text()
                 q = path.find('.', -5, -1)
                 while path[q] != "/":
                     q -= 1
                 filename = path[q + 1:]
+
                 file = {'file': open(path, 'rb')}
                 size = len(file)
                 key = "123321"
-                fcont = file.r  # 该算法对内存有要求，不适用大文件，有待更新
-                md5 = hashlib.md5(fcont)
+                f = open(path, 'rb')#校验
+                md5_obj = hashlib.md5()
+                while True:
+                    d = f.read(8096)
+                    if not d:
+                        break
+                    md5_obj.update(d)
+                hash_code = md5_obj.hexdigest()
+                f.close()
+                md5 = str(hash_code).lower()
+
                 head = {
                     "apikey": key,
                     "size": size,
@@ -77,8 +87,10 @@ class Ui_file_exchange(QMainWindow):
                     "md5":md5,
                     "formatto":formatto
                 }
+                print(head)
                 head=json.dumps(head)
-                back=sendfile1("127.0.0.1",11170,head,path)
+                back=0
+                #back=sendfile1("127.0.0.1",11170,head,path)
                 if (back == 0):
                     print("ok")
                     self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传完成"))
