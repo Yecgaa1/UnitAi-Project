@@ -89,8 +89,9 @@ class Ui_file_exchange(QMainWindow):
                 }
                 print(head)
                 head=json.dumps(head)
-                back=0
-                #back=sendfile1("127.0.0.1",11170,head,path)
+                #back=0
+
+                back=sendfile1("localhost",11170,head,path)
                 if (back == 0):
                     print("ok")
                     self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传完成"))

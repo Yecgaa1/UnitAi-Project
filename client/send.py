@@ -42,6 +42,8 @@ def login(acc,pd):
 def sendfile1(ip,port,head,whfile):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
+        print(ip)
+        print(port)
         s.connect((ip, port))
         s.send(head.encode('utf-8'))
         time.sleep(0.5)

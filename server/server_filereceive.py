@@ -16,6 +16,7 @@ s.listen(5)                 # 等待客户端连接
 while True:
     c, addr = s.accept()
     try:     # 建立客户端连接。
+        print(1)
         msg1 = c.recv(1024)
         msg = msg1.decode('utf-8')
         result=json.loads(msg.text)
@@ -24,12 +25,15 @@ while True:
             print("Access denine")#数据库校验
             c.close()
             break
+        print(result)
         c.send("O".encode('utf-8'))
         size=result["size"]
         msg1 = c.recv(size+10)
         msg = msg1.decode('utf-8')
-
-        f = open(path, 'rb')  # 校验
+        w = open('"C:/UnitAi-Project/tmp"+result["name"]', 'w')
+        w.write(msg)
+        w.close()
+        f = open('"C:/UnitAi-Project/tmp"+result["name"]', 'rb')  # 校验
         md5_obj = hashlib.md5()
         while True:
             d = f.read(8096)
