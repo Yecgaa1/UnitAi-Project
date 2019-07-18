@@ -49,7 +49,7 @@ class Ui_file_exchange(QMainWindow):
 
                 q=path.find('.', -5, -1)
                 b=path[q+1:]
-                if(b=="doc"or b=="docx" or b=="ppt" or b=="pptx" or b=="md" or b=="ppts"):
+                if(b=="doc"or b=="docx" or b=="ppt" or b=="pptx" or b=="xlsx" or b=="ppts"):
                     self.tableWidget.setItem(num, 2, QTableWidgetItem("pdf"))
                     b = self.tableWidget.item(num, 2).text()
                     print(b)
@@ -65,11 +65,11 @@ class Ui_file_exchange(QMainWindow):
                 while path[q] != "/":
                     q -= 1
                 filename = path[q + 1:]
-
-                file = {'file': open(path, 'rb')}
+                f = open(path, 'rb')
+                file=f.read()
                 size = len(file)
                 key = "123321"
-                f = open(path, 'rb')#校验
+                #校验
                 md5_obj = hashlib.md5()
                 while True:
                     d = f.read(8096)
