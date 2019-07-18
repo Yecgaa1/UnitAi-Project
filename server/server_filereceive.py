@@ -46,7 +46,6 @@ while True:
     if (result["md5"] == md5):
         print("Success")
         c.send("C".encode('utf-8'))
-        file = open(result["filename"], 'wb')
     else:
         print("Error")
         c.send("E".encode('utf-8'))

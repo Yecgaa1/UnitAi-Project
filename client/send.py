@@ -1,3 +1,4 @@
+# code:utf-8
 import socket
 import hashlib,time,os
 from threading import Thread

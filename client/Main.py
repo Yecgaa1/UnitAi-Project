@@ -1,3 +1,4 @@
+# code:utf-8
 import ctypes
 
 from PyQt5 import QtCore, QtGui, QtWidgets,Qt
