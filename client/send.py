@@ -135,3 +135,8 @@ def sendfile2(ip,port,head,whfile):
     except:
         print("No server")
         return 0
+
+
+def waitback(ip,port):
+    s = socket.socket()
+    s.connect((ip, port))
