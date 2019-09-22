@@ -1,7 +1,7 @@
 # code:utf-8
 import ctypes
 
-from PyQt5 import QtCore, QtGui, QtWidgets,Qt
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import  QApplication, QPushButton, QMenu,QLineEdit,QMainWindow,QDialog
 from PyQt5.QtCore import QCoreApplication,QTimer,QThread,pyqtSignal
 from PyQt5.QtGui import QIcon, QPainter, QPixmap,QPalette,QBrush
@@ -54,14 +54,14 @@ def login_action():
     loginapp.setPalette(palette)
 
     lo_textaccount.editingFinished.connect(root)
-#login事件总线
+#login事件绑定
+
 def Im_reload(sacc):
     Im_account.setText(sacc)
     if sacc=="xutongxin":
         Im_account.setStyleSheet("font: 12pt \"萝莉体 第二版\";\n"
                               "color: rgb(102, 204, 255);")
-
-
+#Im事件回调
 
 def root():
     if(lo_textaccount.text()=="xutongxin"):
@@ -69,6 +69,7 @@ def root():
         palette = QPalette()
         palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/xlogin.jpg")))
         loginapp.setPalette(palette)
+#特殊界面回调
 def login1():
     loginButton.setEnabled(False)
     acc = lo_textaccount.text()
@@ -101,12 +102,13 @@ def login1():
     else:
         loginButton.setEnabled(True)
         loginButton.setText("密码错误")
-
+#登陆事件函数
 if __name__=='__main__':
-
+	
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app=QApplication(sys.argv)
-    loginapp=LoginWindow()
-    Imapp=ImWindow()
+    loginapp=LoginWindow()#初始化login界面
+    Imapp=ImWindow()#初始化Im界面
 
     lo_textpassword = loginapp.main_ui.textpassword
     lo_remember = loginapp.main_ui.remember
