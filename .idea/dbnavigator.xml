@@ -44,6 +44,7 @@
         <condition column="name" operator="=" value="朱倩文" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="5a0f5644-4d2a-496f-9809-3e74d719c88c" dataset="account.acc" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -70,21 +71,21 @@
     <connections>
       <connection id="5a0f5644-4d2a-496f-9809-3e74d719c88c" active="true">
         <database>
-          <name value="Connection" />
+          <name value="account" />
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
-          <database-version value="8.0" />
+          <database-version value="5.5" />
           <driver-source value="BUILTIN" />
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
-          <host value="149.28.21.122" />
+          <host value="192.168.0.3" />
           <port value="3306" />
-          <database value="mysql" />
+          <database value="account" />
           <type value="USER_PASSWORD" />
-          <user value="zqw" />
-          <deprecated-pwd value="TGh0X1llY2dhYQ==" />
+          <user value="account" />
+          <deprecated-pwd value="MDE5MTUw" />
         </database>
         <properties>
           <auto-commit value="false" />

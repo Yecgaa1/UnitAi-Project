@@ -112,6 +112,9 @@ def login1():
         loginapp.close()
         Imapp.show()
         Im_reload(acc)
+    elif(re==2):
+        loginButton.setEnabled(True)
+        loginButton.setText("用户不存在")
     else:
         loginButton.setEnabled(True)
         loginButton.setText("密码错误")

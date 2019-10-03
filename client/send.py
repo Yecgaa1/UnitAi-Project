@@ -28,9 +28,12 @@ def login(acc,pd):
 
         msg1 = s.recv(1)
         so = msg1.decode('utf-8')
+        #print(so)
         s.close()
         if (so == "S"):
             return 0
+        elif(so=="A"):
+            return 2
         else:
             return 1
 

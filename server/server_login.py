@@ -1,6 +1,6 @@
 #导入必要包
 import json
-import socket
+import socket,pymysql
 #导入自定义函数
 
 #内函数
@@ -25,15 +25,25 @@ def login():
     pd = msg1.decode('utf-8')
     print(pd)
     #json 校验
-    with open("./SQL/user.json", 'r') as load_f:
-        load_dict = json.load(load_f)
-    if ac in load_dict:
-        if(pd==load_dict[ac]):
-            c.send("S".encode('utf-8'))
-        else:
-            c.send("N".encode('utf-8'))
+    db = pymysql.connect("192.168.0.3", "account", "019150", "account")
+
+    # 使用 cursor() 方法创建一个游标对象 cursor
+    cursor = db.cursor()
+    sql ="select*from acc where name='"+ac+"'"
+    #print(sql)
+    cursor.execute(sql)
+
+    # 使用 fetchone() 方法获取单条数据.
+    data = cursor.fetchall()
+    #print(data)
+    if str(data)!="()":
+        for row in data:
+            if row[4]==pd:
+                c.send("S".encode('utf-8'))
+            else:
+                c.send("N".encode('utf-8'))
     else:
-        c.send("N".encode('utf-8'))
+        c.send("A".encode('utf-8'))
 
 
 while True:
