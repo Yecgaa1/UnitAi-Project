@@ -21,7 +21,8 @@ from login import Ui_login
 from Im import Ui_IM
 # 发送数据程序
 from send import login
-
+#全局变量
+imgpath="./images/new.png"
 with open("./config/config.json", 'r') as load_f:
     load_dict = json.load(load_f)
 
@@ -39,7 +40,7 @@ class LoginWindow(QWidget):
     def paintEvent(self, event):  # set background_img
         painter = QPainter(self)
         painter.drawRect(self.rect())
-        pixmap = QPixmap("./images/new.png")  # 换成自己的图片的相对路径
+        pixmap = QPixmap(imgpath)  # 换成自己的图片的相对路径
         painter.drawPixmap(self.rect(), pixmap)
 
 class ImWindow(QWidget):
@@ -76,10 +77,12 @@ def Im_reload(sacc):
 
 def root():
     if (lo_textaccount.text() == "xutongxin"):
-        print("a")
-        palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/xlogin.jpg")))
-        loginapp.setPalette(palette)
+        #print("a")
+        imgpath="./images/xlogin.jpg"
+        #loginapp.paint()
+        #palette = QPalette()
+        #palette.setBrush(QPalette.Background, QBrush(QPixmap("./images/xlogin.jpg")))
+        #loginapp.setPalette(palette)
 
 
 # 特殊界面回调
@@ -125,7 +128,7 @@ if __name__ == '__main__':
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
     loginapp = LoginWindow()  # 初始化login界面
-    loginapp.paintEngine()
+    #loginapp.paintEngine()
     Imapp = ImWindow()  # 初始化Im界面
 
     lo_textpassword = loginapp.main_ui.textpassword
