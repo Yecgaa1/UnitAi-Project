@@ -12,7 +12,7 @@ conf.read(cfgpath, encoding="utf-8")
 sql_pw=conf.get("sql","pw")
 sql_acc=conf.get("sql","acc")
 sql_add=conf.get("sql","add")
-
+version="0.0.1"
 
 
 
@@ -28,6 +28,9 @@ def login():
     msg1 = c.recv(16)
     ac = msg1.decode('utf-8')
     print(ac)
+    if ac=="ConnectTest":
+        c.send(version.encode("utf-8"))
+        c.close()
     msg1 = c.recv(64)
     pd = msg1.decode('utf-8')
     print(pd)
@@ -47,10 +50,13 @@ def login():
         for row in data:
             if row[4]==pd:
                 c.send("S".encode('utf-8'))
+                c.close()
             else:
                 c.send("N".encode('utf-8'))
+                c.close()
     else:
         c.send("A".encode('utf-8'))
+        c.close()
 
 
 while True:

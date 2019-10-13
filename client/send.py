@@ -40,6 +40,7 @@ def login(acc,pd):
         # login触发事件
     except:
         print("No server")
+        return -1
 
 #发送文件函数
 #标准文件发送函数(带检查，全加载式检查文件，不带进度，适用于10m以下）

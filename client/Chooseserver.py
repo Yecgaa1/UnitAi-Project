@@ -8,12 +8,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication,QWidget
+import sys
 
+class Ui_chooseserver(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
 
-class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(424, 291)
+        Form.resize(720, 512)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.comboBox = QtWidgets.QComboBox(Form)
@@ -53,7 +58,13 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-
+        #self.show()
+        op = QtWidgets.QGraphicsOpacityEffect()
+        op.setOpacity(0.5)
+        self.ip.setGraphicsEffect(op)
+        op = QtWidgets.QGraphicsOpacityEffect()
+        op.setOpacity(0.5)
+        self.port.setGraphicsEffect(op)
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -63,3 +74,10 @@ class Ui_Form(object):
         self.label_2.setText(_translate("Form", "  端口"))
         self.test.setText(_translate("Form", "测试"))
         self.save.setText(_translate("Form", "保存"))
+
+
+if __name__ == '__main__':  # 调试用启动器
+    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
+    loginapp = QApplication(sys.argv)
+    ex = Ui_chooseserver()
+    sys.exit(loginapp.exec_())

@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QLineEdit, QMainWindow, QWidget
 from PyQt5.QtGui import QIcon, QPixmap, QPalette, QBrush
-import sys
+import sys,os,configparser
 
 # 基本五大包导入
 
@@ -30,9 +30,13 @@ import ctypes
 
 # import Im
 # from Main import loginsuccess
-
-with open("./config/config.json", 'r') as load_f:
-    load_dict = json.load(load_f)
+curpath=os.path.dirname(os.path.realpath(__file__))
+cfgpath=os.path.join(curpath,"config/user.ini")
+conf=configparser.ConfigParser()
+conf.read(cfgpath, encoding="utf-8")
+loginmode=conf.get("acc","loginmode")
+acc=conf.get("acc","acc")
+pd=conf.get("acc","pd")
 
 
 class Ui_login(QWidget):
@@ -45,11 +49,9 @@ class Ui_login(QWidget):
             self.remember.setChecked(True)
 
     def setupUi(self, Form):
-        # json加载
-        with open("./config/config.json", 'r') as load_f:
-            load_dict = json.load(load_f)
 
-        Form.setObjectName("Form")
+
+        Form.setObjectName("登陆")
         Form.resize(1024,728)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
@@ -144,15 +146,12 @@ class Ui_login(QWidget):
 
         # 按钮事件绑定
         self.Auto.clicked.connect(self.auto)
-
-        if load_dict["loginmode"] == 2:
-            self.textaccount.setText(load_dict["acc"])
-            self.textpassword.setText(load_dict["pd"])
-            self.login()
-            return 0
-        if load_dict["loginmode"] == 1:
-            self.textaccount.setText(load_dict["acc"])
-            self.textpassword.setText(load_dict["pd"])
+        if loginmode== "2":
+            self.textaccount.setText(acc)
+            self.textpassword.setText(pd)
+        if loginmode == "1":
+            self.textaccount.setText(acc)
+            self.textpassword.setText(pd)
             self.remember.setChecked(True)
 
     # 结束第二初始化
