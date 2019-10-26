@@ -148,10 +148,10 @@ class Ui_login(QWidget):
         self.Auto.clicked.connect(self.auto)
         if loginmode== "2":
             self.textaccount.setText(acc)
-            self.textpassword.setText(pd)
+            self.textpassword.setText('111111')
         if loginmode == "1":
             self.textaccount.setText(acc)
-            self.textpassword.setText(pd)
+            self.textpassword.setText('111111')
             self.remember.setChecked(True)
 
     # 结束第二初始化

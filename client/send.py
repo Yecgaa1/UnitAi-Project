@@ -1,35 +1,52 @@
 # code:utf-8
+Version="0.0.1b"
 import socket
-import hashlib,time,os
+import hashlib,time,os,configparser
 from threading import Thread
-#登录程序
+#登录中枢
 
 
 def login(acc,pd):
-
-	#print(123)
+    curpath = os.path.dirname(os.path.realpath(__file__))
+    cfgpath = os.path.join(curpath, "config/user.ini")
+    conf = configparser.ConfigParser()
+    conf.read(cfgpath, encoding="utf-8")
+    #add = conf.get("server", "add")
+    port = conf.get("server", "port")
+    loginmode = conf.get("acc", "loginmode")
+    pd = conf.get("acc", "pd")
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host = socket.gethostname()
-    port = 19150
-    try:
+    #print(host)
+    port = int(port)
+    #try:
+    if True:
         s.connect((host, port))  # ip和端口
 
         # 以下为建立tcp连接
 
 
-        s.send("lo".encode('utf-8'))
-        sha256 = hashlib.sha256()
+        if acc=='ConnectTest':
+            s.send(acc.encode('utf-8'))
+            msg1 = s.recv(10)
+            so = msg1.decode('utf-8')
+            s.close()
+            print(so)
+            return so
         s.send(acc.encode('utf-8'))
         time.sleep(1)
-        sha256.update(pd.encode('utf-8'))
-        res = sha256.hexdigest()
+        if loginmode ==0:
+            sha256 = hashlib.sha256()
+            sha256.update(pd.encode('utf-8'))
+            res = sha256.hexdigest()
+        else:
+            res=pd
         s.send(res.encode('utf-8'))
-        # time.sleep(1)
-
+        time.sleep(1)
         msg1 = s.recv(1)
         so = msg1.decode('utf-8')
-        #print(so)
         s.close()
+
         if (so == "S"):
             return 0
         elif(so=="A"):
@@ -38,9 +55,9 @@ def login(acc,pd):
             return 1
 
         # login触发事件
-    except:
-        print("No server")
-        return -1
+    #except:
+        #print("No server")
+        #return -1
 
 #发送文件函数
 #标准文件发送函数(带检查，全加载式检查文件，不带进度，适用于10m以下）

@@ -1,11 +1,10 @@
 # code:utf-8
-import ctypes
-
+Version="0.0.1b"
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QPushButton, QMenu, QLineEdit, QMainWindow, QDialog, QWidget
 from PyQt5.QtCore import QCoreApplication, QTimer, QThread, pyqtSignal
 from PyQt5.QtGui import QIcon, QPainter, QPixmap, QPalette, QBrush
-import sys, os, configparser
+import sys, os, configparser,ctypes
 
 # 基本五大包导入
 
@@ -37,6 +36,7 @@ pd = conf.get("acc", "pd")
 
 op = QtWidgets.QGraphicsOpacityEffect()
 op.setOpacity(0.5)
+
 
 class LoginWindow(QWidget):
     def __init__(self):
@@ -76,6 +76,16 @@ class chooseserverWindow(QWidget):
         painter.drawPixmap(self.rect(), pixmap)
 
 
+def Im_reload(acc):
+    print(1)
+    Im_account = Imapp.Im.account
+    Im_account.setText(acc)
+
+    if acc == "xutongxin":
+        Im_account.setStyleSheet("font: 12pt \"萝莉体 第二版\";\n"
+                                 "color: rgb(102, 204, 255);")
+
+
 class logindef():
     def login_action(self):
         # loginButton = loginapp.main_ui.loginButton
@@ -90,12 +100,6 @@ class logindef():
     def chooseserver(self):
 
         chooseserverapp.show()
-
-    def Im_reload(sacc):
-        Im_account.setText(sacc)
-        if sacc == "xutongxin":
-            Im_account.setStyleSheet("font: 12pt \"萝莉体 第二版\";\n"
-                                     "color: rgb(102, 204, 255);")
 
     # Im事件回调
 
@@ -117,7 +121,7 @@ class logindef():
             loginButton.setText("登录成功")
             loginapp.close()
             Imapp.show()
-            logindef.Im_reload(acc)
+            Im_reload("xutongxin")
         elif (re == 2):
             loginButton.setEnabled(True)
             loginButton.setText("用户不存在")
@@ -150,8 +154,6 @@ if __name__ == '__main__':
     # login类继承
 
     logindef.login_action()  # login事件总线
-
-    Im_account = Imapp.Im.account
 
     loginapp.show()
 

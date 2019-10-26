@@ -8,17 +8,59 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication,QWidget
-import sys
+from PyQt5.QtWidgets import QApplication,QWidget,QMessageBox
+import sys,os,configparser
+from send import login
+curpath=os.path.dirname(os.path.realpath(__file__))
+cfgpath=os.path.join(curpath,"config/user.ini")
+conf=configparser.ConfigParser()
+conf.read(cfgpath, encoding="utf-8")
+ipset=conf.get("server","add")
+portset=conf.get("server","port")
+
 
 class Ui_chooseserver(QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
+    def testserver(self):
+        try:
+            serverversion=login('ConnectTest',123)
+            print(serverversion)
+            reply = QMessageBox.information(self,
+                                    "测试结果",  
+                                    "服务器版本："+serverversion,  
+                                    QMessageBox.Yes)
+        except:
+            reply = QMessageBox.information(self,
+                                    "测试结果",  
+                                    "无法连接至服务器",  
+                                    QMessageBox.Yes)
+        return 0
+
+    def save1(self):
+        portset=self.port.text()
+        ipset=self.ip.text()
+        conf.set("server","port",portset)
+        #conf.set("server","add",ip)
+        try:
+            conf.write(sys.stdout)
+            reply = QMessageBox.information(self,
+                                    '提示',  
+                                    "保存成功",  
+                                    QMessageBox.Yes)
+        except:
+            reply = QMessageBox.information(self,
+                                    "提示",  
+                                    "保存失败",  
+                                    QMessageBox.Yes)
+        sys.exit()
+    def cancel1(self):
+        sys.exit()
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(720, 512)
+        Form.resize(720, 576)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.comboBox = QtWidgets.QComboBox(Form)
@@ -49,22 +91,35 @@ class Ui_chooseserver(QWidget):
         self.port.setObjectName("port")
         self.horizontalLayout.addWidget(self.port)
         self.gridLayout.addLayout(self.horizontalLayout, 2, 0, 1, 1)
+        self.cancel = QtWidgets.QPushButton(Form)
+        self.cancel.setObjectName("cancel")
+        self.gridLayout.addWidget(self.cancel, 3, 1, 1, 1)
         self.test = QtWidgets.QPushButton(Form)
         self.test.setObjectName("test")
-        self.gridLayout.addWidget(self.test, 3, 1, 1, 1)
+        self.gridLayout.addWidget(self.test, 4, 1, 1, 1)
         self.save = QtWidgets.QPushButton(Form)
         self.save.setObjectName("save")
-        self.gridLayout.addWidget(self.save, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.save, 5, 1, 1, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-        #self.show()
+
+
+
+        #第二初始化
         op = QtWidgets.QGraphicsOpacityEffect()
         op.setOpacity(0.5)
         self.ip.setGraphicsEffect(op)
         op = QtWidgets.QGraphicsOpacityEffect()
         op.setOpacity(0.5)
         self.port.setGraphicsEffect(op)
+        self.port.setText(portset)
+        self.ip.setText(ipset)
+
+        #按键绑定
+        self.test.clicked.connect(self.testserver)
+        self.save.clicked.connect(self.save1)
+        self.cancel.clicked.connect(self.cancel1)
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -72,6 +127,7 @@ class Ui_chooseserver(QWidget):
         self.comboBox.setItemText(1, _translate("Form", "私有工作站"))
         self.label.setText(_translate("Form", "服务器地址"))
         self.label_2.setText(_translate("Form", "  端口"))
+        self.cancel.setText(_translate("Form", "取消"))
         self.test.setText(_translate("Form", "测试"))
         self.save.setText(_translate("Form", "保存"))
 
@@ -80,4 +136,5 @@ if __name__ == '__main__':  # 调试用启动器
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     loginapp = QApplication(sys.argv)
     ex = Ui_chooseserver()
+    ex.show()
     sys.exit(loginapp.exec_())
