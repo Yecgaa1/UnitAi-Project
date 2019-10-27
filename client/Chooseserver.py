@@ -18,7 +18,6 @@ conf.read(cfgpath, encoding="utf-8")
 ipset=conf.get("server","add")
 portset=conf.get("server","port")
 
-
 class Ui_chooseserver(QWidget):
     def __init__(self):
         super().__init__()
@@ -29,13 +28,13 @@ class Ui_chooseserver(QWidget):
             serverversion=login('ConnectTest',123)
             print(serverversion)
             reply = QMessageBox.information(self,
-                                    "测试结果",  
-                                    "服务器版本："+serverversion,  
+                                    "测试结果",
+                                    "服务器版本："+serverversion,
                                     QMessageBox.Yes)
         except:
             reply = QMessageBox.information(self,
-                                    "测试结果",  
-                                    "无法连接至服务器",  
+                                    "测试结果",
+                                    "无法连接至服务器",
                                     QMessageBox.Yes)
         return 0
 
@@ -47,13 +46,13 @@ class Ui_chooseserver(QWidget):
         try:
             conf.write(sys.stdout)
             reply = QMessageBox.information(self,
-                                    '提示',  
-                                    "保存成功",  
+                                    '提示',
+                                    "保存成功",
                                     QMessageBox.Yes)
         except:
             reply = QMessageBox.information(self,
-                                    "提示",  
-                                    "保存失败",  
+                                    "提示",
+                                    "保存失败",
                                     QMessageBox.Yes)
         sys.exit()
     def cancel1(self):
