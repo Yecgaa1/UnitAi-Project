@@ -26,17 +26,15 @@ import hashlib
 import time
 import ctypes
 
+from config import config
 # 以下为导入自定义函数
 
 # import Im
 # from Main import loginsuccess
-curpath=os.path.dirname(os.path.realpath(__file__))
-cfgpath=os.path.join(curpath,"config/user.ini")
-conf=configparser.ConfigParser()
-conf.read(cfgpath, encoding="utf-8")
-loginmode=conf.get("acc","loginmode")
-acc=conf.get("acc","acc")
-pd=conf.get("acc","pd")
+
+loginmode=config("acc","loginmode")
+acc=config("acc","acc")
+pd=config("acc","pd")
 
 
 class Ui_login(QWidget):

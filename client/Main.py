@@ -19,6 +19,7 @@ import time
 from login import Ui_login
 from Im import Ui_IM
 from Chooseserver import Ui_chooseserver
+from config import config
 # 发送数据程序
 
 from send import login
@@ -26,13 +27,9 @@ from send import login
 # 全局变量
 imgpath = "./images/login.jpg"
 
-curpath = os.path.dirname(os.path.realpath(__file__))
-cfgpath = os.path.join(curpath, "config/user.ini")
-conf = configparser.ConfigParser()
-conf.read(cfgpath, encoding="utf-8")
-loginmode = conf.get("acc", "loginmode")
-acc = conf.get("acc", "acc")
-pd = conf.get("acc", "pd")
+loginmode = config("acc", "loginmode")
+acc = config("acc", "acc")
+pd = config("acc", "pd")
 
 op = QtWidgets.QGraphicsOpacityEffect()
 op.setOpacity(0.5)
@@ -115,7 +112,7 @@ class logindef():
         acc = lo_textaccount.text()
         pd = lo_textpassword.text()
         # 获取密码和账号
-
+        print(1)
         re = login(acc, pd)
         if (re == 0):
             loginButton.setText("登录成功")

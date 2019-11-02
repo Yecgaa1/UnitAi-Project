@@ -15,10 +15,11 @@ def login(acc,pd):
     port = conf.get("server", "port")
     loginmode = conf.get("acc", "loginmode")
     pd = conf.get("acc", "pd")
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s = socket.socket()
     host = socket.gethostname()
     #print(host)
     port = int(port)
+    print(port)
     #try:
     if True:
         s.connect((host, port))  # ip和端口
@@ -156,8 +157,3 @@ def sendfile2(ip,port,head,whfile):
     except:
         print("No server")
         return 0
-
-
-def waitback(ip,port):
-    s = socket.socket()
-    s.connect((ip, port))

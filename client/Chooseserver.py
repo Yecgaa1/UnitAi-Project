@@ -11,12 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication,QWidget,QMessageBox
 import sys,os,configparser
 from send import login
-curpath=os.path.dirname(os.path.realpath(__file__))
-cfgpath=os.path.join(curpath,"config/user.ini")
-conf=configparser.ConfigParser()
-conf.read(cfgpath, encoding="utf-8")
-ipset=conf.get("server","add")
-portset=conf.get("server","port")
+from config import config
+
+
+ipset=config("server","add")
+portset=config("server","port")
 
 class Ui_chooseserver(QWidget):
     def __init__(self):
