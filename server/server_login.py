@@ -1,11 +1,20 @@
 #导入必要包
+Version="0.0.1b"
 import json
-import socket
+import socket,os,configparser
+#import pymysql
 #导入自定义函数
 
 #内函数
-
-
+curpath=os.path.dirname(os.path.realpath(__file__))
+cfgpath=os.path.join(curpath,"Setting/sql.ini")  #读取到本机的配置文件
+conf=configparser.ConfigParser()
+print(cfgpath)
+conf.read(cfgpath, encoding="utf-8")
+sql_pw=conf.get("sql","pw")
+sql_acc=conf.get("sql","acc")
+sql_add=conf.get("sql","add")
+version="0.0.1"
 
 
 
@@ -18,28 +27,45 @@ s.bind((host, port))        # 绑定端口
 
 s.listen(5)                 # 等待客户端连接
 def login():
-    msg1 = c.recv(16)
-    ac = msg1.decode('utf-8')
-    print(ac)
-    msg1 = c.recv(64)
-    pd = msg1.decode('utf-8')
-    print(pd)
-    #json 校验
-    with open("./SQL/user.json", 'r') as load_f:
-        load_dict = json.load(load_f)
-    if ac in load_dict:
-        if(pd==load_dict[ac]):
-            c.send("S".encode('utf-8'))
-        else:
-            c.send("N".encode('utf-8'))
-    else:
-        c.send("N".encode('utf-8'))
+        print(addr)
+        msg1 = c.recv(16)
+        ac = msg1.decode('utf-8')
+        print(ac)
+        if ac == "ConnectTest":
+            c.send(version.encode("utf-8"))
+            c.close()
+            return 0
+        msg1 = c.recv(64)
+        pd = msg1.decode('utf-8')
+        print(pd)
+        # 数据库校验
+        #db = pymysql.connect(sql_add, sql_acc, sql_pw, "account")
+
+        # 使用 cursor() 方法创建一个游标对象 cursor
+        #cursor = db.cursor()
+        #sql = "select*from acc where name='" + ac + "'"
+        # print(sql)
+        #cursor.execute(sql)
+
+        # 使用 fetchone() 方法获取单条数据.
+        #data = cursor.fetchall()
+        # print(data)
+        #if str(data) != "()":
+            #for row in data:
+                #if row[4] == pd:
+                    #c.send("S".encode('utf-8'))
+                    #c.close()
+                #else:
+                    #c.send("N".encode('utf-8'))
+                    #c.close()
+        c.send("S".encode('utf-8'))
+        c.close()
+        #else:
+            #c.send("A".encode('utf-8'))
+            #c.close()
 
 
 while True:
     c, addr = s.accept()     # 建立客户端连接。
-    msg1 = c.recv(2)
-    msg = msg1.decode('utf-8')
-    if(msg=="lo"):
-        login()
+    login()
 

@@ -27,7 +27,6 @@ class Ui_file_exchange(QMainWindow):
                 self.tableWidget.setItem(num, 1, QTableWidgetItem(file))
                 q = file.find('.', 10, -1)
                 b = file[q + 1:]
-                print(b)
                 if (b == "doc" or b == "docx" or b == "ppt" or b == "pptx" or b == "md" or b == "ppts"):
                     self.tableWidget.setItem(num, 2, QTableWidgetItem("pdf"))
                 self.tableWidget.setItem(num, 3, QTableWidgetItem("就绪"))
@@ -98,7 +97,6 @@ class Ui_file_exchange(QMainWindow):
                 if (back == 0):
                     print("ok")
                     self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传完成"))
-                    waitback(ip,11172)
                 elif(back == 1):
                     self.tableWidget.setItem(num1, 3, QTableWidgetItem("未授权"))
                     return

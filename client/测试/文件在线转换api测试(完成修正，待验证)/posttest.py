@@ -17,13 +17,14 @@ if(True):
 
     req = requests.post(urlbegin, json.dumps(data_begin), headers)
     result = json.loads(req.text)
-    id=result['data']['id']
-    print(id)
+	id=result['data']['id']
+	print(id)
     urlupload="https://api.convertio.co/convert/"+id+"/123.doc"
-    file = {'file': open('123.doc', 'rb')}
+    file =open('123.doc', 'rb')
     req = requests.put(urlupload,files=file)
-    result = json.loads(req.text)
-    print(result)
+	result = json.loads(req.text)
+	print(result)
+	file.close()
     print("begin!")
     urlcheck="https://api.convertio.co/convert/"+id+"/status"
 
