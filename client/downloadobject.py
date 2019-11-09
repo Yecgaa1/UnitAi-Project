@@ -1,25 +1,33 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'downloadobject.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
-
-
-
-from PyQt5.QtWidgets import QHeaderView
+from PyQt5.QtWidgets import QHeaderView,QTableView
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QLineEdit, QMainWindow, QWidget
+from PyQt5.QtWidgets import QApplication, QLineEdit, QMainWindow, QWidget,QTableWidgetItem,QPushButton
 from PyQt5.QtGui import QIcon, QPixmap, QPalette, QBrush,QPainter
 import sys,os
-
+num=0
+access=0
 class Ui_Downloadobject(QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+    def do(self,id):
+        print(id)
+        self.btn.setText("下载中")
+    def fill(self,name,size,objecttype,access):
+        global num
+        self.tableWidget.setRowCount(num+1)
+        self.tableWidget.setVerticalHeaderItem(num, QtWidgets.QTableWidgetItem())
+        self.tableWidget.setItem(num, 0, QTableWidgetItem(str(name)))
+        self.tableWidget.setItem(num, 1, QTableWidgetItem(size))
+        self.tableWidget.setItem(num, 2, QTableWidgetItem(objecttype))
+        self.tableWidget.setCellWidget(num, 3,self.fillbtn(num))
+        self.tableWidget.setItem(num, 4, QTableWidgetItem(access))
+        num += 1
+    def fillbtn(self,id):
+        self.btn = QPushButton("下载")
+        self.btn.setDown(True)
 
-
+        self.btn.clicked.connect(lambda:self.do(id))
+        return self.btn
     def setupUi(self, Form):
         Form.setObjectName("Form")
         #Form.resize(720, 576)
@@ -30,9 +38,7 @@ class Ui_Downloadobject(QWidget):
         self.tableWidget = QtWidgets.QTableWidget(Form)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(5)
-        self.tableWidget.setRowCount(1)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
+        self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
@@ -46,21 +52,24 @@ class Ui_Downloadobject(QWidget):
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
 
 
-        #self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive) #可调整大小
+
+
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Interactive) #可调整大小
         #self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch) #自适应大小
         self.tableWidget.horizontalHeader().resizeSection(0, 350)
         self.tableWidget.horizontalHeader().resizeSection(1, 100)
         self.tableWidget.horizontalHeader().resizeSection(2, 75)
         self.tableWidget.horizontalHeader().resizeSection(3, 75)
         self.tableWidget.horizontalHeader().resizeSection(4, 75)
-
+        self.tableWidget.setEditTriggers(QTableView.NoEditTriggers)
 
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-        #op = QtWidgets.QGraphicsOpacityEffect()
-        #op.setOpacity(0.5)
-        #self.tableWidget.setGraphicsEffect(op)
+        i=10
+        while i<20:
+            self.fill(i,"123",'123','123')
+            i+=1
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
