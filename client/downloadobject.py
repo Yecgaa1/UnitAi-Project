@@ -9,9 +9,11 @@ class Ui_Downloadobject(QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-    def do(self,id):
+    def download(self,id):
         print(id)
-        self.btn.setText("下载中")
+        self.tableWidget.setCellWidget(id, 3, self.downloadingbtn(id))
+    def downloadstop(self,id):
+        print(id)
     def fill(self,name,size,objecttype,access):
         global num
         self.tableWidget.setRowCount(num+1)
@@ -19,14 +21,20 @@ class Ui_Downloadobject(QWidget):
         self.tableWidget.setItem(num, 0, QTableWidgetItem(str(name)))
         self.tableWidget.setItem(num, 1, QTableWidgetItem(size))
         self.tableWidget.setItem(num, 2, QTableWidgetItem(objecttype))
-        self.tableWidget.setCellWidget(num, 3,self.fillbtn(num))
+        self.tableWidget.setCellWidget(num, 3,self.downloadbtn(num))
         self.tableWidget.setItem(num, 4, QTableWidgetItem(access))
         num += 1
-    def fillbtn(self,id):
+    def downloadingbtn(self,id):
+        print(id)
+        self.btn = QPushButton("下载中")
+        self.btn.setDown(True)
+        self.btn.clicked.connect(lambda: self.downloadstop(id))
+        return self.btn
+    def downloadbtn(self,id):
         self.btn = QPushButton("下载")
         self.btn.setDown(True)
 
-        self.btn.clicked.connect(lambda:self.do(id))
+        self.btn.clicked.connect(lambda:self.download(id))
         return self.btn
     def setupUi(self, Form):
         Form.setObjectName("Form")
