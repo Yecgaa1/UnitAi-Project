@@ -28,7 +28,7 @@ while True:
     print(result)
     c.send("O".encode('utf-8'))
     size = result["size"]
-    msga = c.recv(size + 10)
+    msg = c.recv(size + 10)
     os.chdir(r'E:\UnitAi-Project\tmp')
     w = open(result["filename"], "wb")
     w.write(msg)

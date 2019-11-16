@@ -40,6 +40,10 @@ class Ui_chooseserver(QWidget):
     def save1(self):
         portset=self.port.text()
         ipset=self.ip.text()
+        curpath = os.path.dirname(os.path.realpath(__file__))
+        cfgpath = os.path.join(curpath, "config/user.ini")
+        conf = configparser.ConfigParser()
+        conf.read(cfgpath, encoding="utf-8")
         conf.set("server","port",portset)
         #conf.set("server","add",ip)
         try:
