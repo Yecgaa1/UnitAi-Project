@@ -66,11 +66,8 @@ class Ui_file_exchange(QMainWindow):
                 while path[q] != "/":
                     q -= 1
                 filename = path[q + 1:]
-                f = open(path, 'rb')
-                file=f.read()
-                size = len(file)
+                size = str(os.path.getsize(path))
                 key = "123321"
-                f.close()
                 f = open(path, 'rb')
                 myHash = hashlib.md5()
                 while True:
@@ -98,7 +95,6 @@ class Ui_file_exchange(QMainWindow):
                 if (back == 0):
                     print("ok")
                     self.tableWidget.setItem(num1, 3, QTableWidgetItem("上传完成"))
-                    waitback(ip,11172)
                 elif(back == 1):
                     self.tableWidget.setItem(num1, 3, QTableWidgetItem("未授权"))
                     return

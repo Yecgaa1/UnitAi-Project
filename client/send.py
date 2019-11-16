@@ -123,14 +123,14 @@ def sendfile2(ip,port,head,whfile):
             s.close()
             return 1
         elif(msg=="O"):
-            file = {'file': open(whfile, 'rb')}
-            block=int(file/1024)
-            if(file%1024!=0):
-                block+=1
+            file = open(whfile, 'rb')
+            block=float(int(os.path.getsize(whfile))/1024)
+            if(block%1!=0):
+                block=int(block+1)
             i=1
             t=0
             while i<=block:
-                s.send(file[t:t+1025].encode('utf-8'))
+                s.send(str(file[t:t+1025]).encode('utf-8'))
                 t+=1024
             time.sleep(0.5)
             msg1 = s.recv(1)
