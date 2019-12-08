@@ -16,7 +16,7 @@ if (True):
         "filename": "123.doc"
     }
 
-    req = requests.post(urlbegin, json.dumps(data_begin), headers)
+    req = requests.post(urlbegin, json.dumps(data_begin), headers=headers)
     result = json.loads(req.text)
     id = result['data']['id']
     print(id)
@@ -30,7 +30,7 @@ print("begin!")
 urlcheck = "https://api.convertio.co/convert/" + id + "/status"
 
 while 1:
-    req = requests.get(urlcheck, headers)
+    req = requests.get(urlcheck, headers=headers)
     result1 = json.loads(req.text)
     try:
         if (result1['data']['step'] == "finish"):
@@ -43,7 +43,7 @@ while 1:
 
 urlfinish = "https://api.convertio.co/convert/" + id + "/dl/base64"
 
-req = requests.get(urlfinish, headers)
+req = requests.get(urlfinish, headers=headers)
 result = json.loads(req.text)
 try:
     base = result['data']['content']

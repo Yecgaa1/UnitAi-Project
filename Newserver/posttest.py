@@ -1,6 +1,6 @@
 import json, requests
 
-url = 'http://127.0.0.1:5000/login'
+url = 'http://127.0.0.1:19150/login'
 data = {
     "nm":"xutongxin"
 }

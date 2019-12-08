@@ -112,8 +112,7 @@ class logindef():
         acc = lo_textaccount.text()
         pd = lo_textpassword.text()
         # 获取密码和账号
-        print(1)
-        re = login(acc, pd)
+        re = int(login(acc, pd))
         if (re == 0):
             loginButton.setText("登录成功")
             loginapp.close()

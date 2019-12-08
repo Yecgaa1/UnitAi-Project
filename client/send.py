@@ -1,12 +1,32 @@
 # code:utf-8
 Version="0.0.1b"
-import socket
+import socket,requests,json
 import hashlib,time,os,configparser
 from threading import Thread
 #登录中枢
 
-
 def login(acc,pd):
+    curpath = os.path.dirname(os.path.realpath(__file__))
+    cfgpath = os.path.join(curpath, "config/user.ini")
+    conf = configparser.ConfigParser()
+    conf.read(cfgpath, encoding="utf-8")
+    add = conf.get("server", "add")
+    port = conf.get("server", "port")
+    #loginmode = conf.get("acc", "loginmode")
+    pd = conf.get("acc", "pd")
+    headers = {'Content-Type': 'application/json'}
+    url="http://"+add+':'+port+"/login"
+    print(url)
+    data = {
+            "acc":acc,
+            "pd":pd
+    }
+    req = requests.post(url, json.dumps(data), headers=headers)
+    result = json.loads(req.text)
+    print(result['code'])
+    return result['code']
+
+def login_old(acc,pd):
     curpath = os.path.dirname(os.path.realpath(__file__))
     cfgpath = os.path.join(curpath, "config/user.ini")
     conf = configparser.ConfigParser()
