@@ -11,7 +11,7 @@
 
 第二代负责人：（zqw)
 
-​              （tjy）
+​             taanjy（tjy）
 
 第三代负责人：Jay（ljj）
 
