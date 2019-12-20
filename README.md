@@ -25,6 +25,6 @@ client 客户端源程序
 install 项目安装脚本
 
 ### Bug 提交
-[Issuses] https://github.com/xutongxin1/UnitAi-Project/issues
+[Issuses](https://github.com/xutongxin1/UnitAi-Project/issues)
 
 项目可以被PyCharm(.idea)与VSCode(.vs)打开
