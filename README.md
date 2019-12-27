@@ -10,6 +10,7 @@
 创始人：许童心（lht)
 
 第二代负责人：Qwitch（zqw)
+
              taanjy（tjy）
 
 第三代负责人：Jay（ljj）
