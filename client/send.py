@@ -4,7 +4,11 @@ import socket,requests,json
 import hashlib,time,os,configparser
 from threading import Thread
 #登录中枢
-
+def hash(word):
+    sha256 = hashlib.sha256()
+    sha256.update(word.encode('utf-8'))
+    res = sha256.hexdigest()
+    return res
 def login(acc,pd):
     curpath = os.path.dirname(os.path.realpath(__file__))
     cfgpath = os.path.join(curpath, "config/user.ini")
@@ -17,6 +21,7 @@ def login(acc,pd):
     headers = {'Content-Type': 'application/json'}
     url="http://"+add+':'+port+"/login"
     print(url)
+    pd=hash(pd)
     data = {
             "acc":acc,
             "pd":pd

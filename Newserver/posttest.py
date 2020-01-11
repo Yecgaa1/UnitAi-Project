@@ -1,15 +1,14 @@
 import json, requests
 
-url = 'http://127.0.0.1:19150/login'
+url = 'http://127.0.0.1:19150/test'
 data = {
-    "nm":"xutongxin"
+    "filename": "1.ppt"
 }
-headers={
-    'Content-Type':'application/json'
+headers = {
+    'Content-Type': 'application/json'
 }
-req = requests.post(url, json.dumps(data),headers=headers)
-#result = json.loads(req.text)
-result=req.text
-print(req)
-print(result)
-
+req = requests.post(url, json.dumps(data), headers=headers)
+# result = json.loads(req.text)
+result = req.headers
+with open("123.zip", 'wb') as f:
+    f.write(req.content)
