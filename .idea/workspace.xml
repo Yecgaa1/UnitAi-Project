@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="576d10f9-db3f-49d2-9486-f27562b3f997" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Newserver/osdef.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Newserver/test.ppt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/UnitAi-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UnitAi-Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Newserver/posttest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Newserver/posttest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Newserver/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Newserver/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Newserver/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Newserver/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/send.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/send.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +43,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="D:/Program Files/python/python.exe" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.updates" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
