@@ -23,15 +23,15 @@ def exchangefile(rec):
         name = rec["filename"]
         print(rec["filename"])
         path = prpath + "/download/exchange/" + rec["filename"]
-        # if os.path.isfile(path):
-        print("Ok")
-        path = prpath.replace("\\", "/") + "/download/exchange"
-        print(path)
+        if os.path.isfile(path):
+            #print("Ok")
+            path = prpath.replace("\\", "/") + "/download/exchange"
+            print(path)
         response = make_response(
             send_from_directory(path, name, as_attachment=True))
         return response
-    else:
-        return abort(301)
+    #else:
+        #return abort(301)
 
 
 @app.route('/login', methods=['POST'])
@@ -88,11 +88,11 @@ def ConnectTest():
     return Version
 
 
-@app.route('/download/exchange/', methods=['POST'])
-def download():
-    # print(type)
-    # if type == "exchange":
-    return exchangefile(request.json)
+@app.route('/download/<type>', methods=['POST'])
+def download(type):
+    print(type)
+    if type == "exchange":
+        return exchangefile(request.json)
     # else:
     # abort(404)
 
